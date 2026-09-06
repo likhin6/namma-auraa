@@ -48,7 +48,7 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
       await trackEvent('wishlist_remove', productId);
     } else {
       await supabase.from('wishlists').insert({ user_id: user.id, product_id: productId });
-      setWishlistIds(prev => new Set([...prev, productId]));
+      setWishlistIds(prev => new Set(prev).add(productId));
       await trackEvent('wishlist_add', productId);
     }
   }
