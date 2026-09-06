@@ -86,24 +86,25 @@ export default function EditProductPage() {
         tags: (data.tags || []).join(', '),
       });
 
-      const existingSizes = new Set((data.product_variants || []).map((v: any) => v.size));
+      const variantsData = (data.product_variants || []) as Array<{ id: string; size: string; color: string | null; sku: string | null; stock: number }>;
       const allVariants: Variant[] = SIZES.map(size => {
-        const existing = (data.product_variants || []).find((v: any) => v.size === size);
+        const existing = variantsData.find(v => v.size === size);
         return existing
           ? { id: existing.id, size: existing.size, color: existing.color || 'Black', sku: existing.sku || '', stock: String(existing.stock ?? 0) }
           : { size, color: 'Black', sku: '', stock: '0' };
       });
       setVariants(allVariants);
 
-      const sortedImages = (data.product_images || []).sort((a: any, b: any) => a.display_order - b.display_order);
-      setImages(sortedImages.length > 0 ? sortedImages.map((img: any) => ({ id: img.id, image_url: img.image_url })) : [{ image_url: '' }]);
+      const imagesData = (data.product_images || []) as Array<{ id: string; image_url: string; display_order: number }>;
+      const sortedImages = imagesData.sort((a, b) => a.display_order - b.display_order);
+      setImages(sortedImages.length > 0 ? sortedImages.map(img => ({ id: img.id, image_url: img.image_url })) : [{ image_url: '' }]);
     } finally {
       setLoadingData(false);
     }
   }
 
-  function updateForm(key: string, value: any) {
-    setForm((prev: any) => ({ ...prev, [key]: value }));
+  function updateForm(key: string, value: string | boolean) {
+    setForm((prev: Record<string, unknown>) => ({ ...prev, [key]: value }));
   }
 
   function updateVariant(index: number, key: string, value: string) {
@@ -167,8 +168,9 @@ export default function EditProductPage() {
 
       toast.success('Product updated');
       router.push('/admin/products');
-    } catch (err: any) {
-      toast.error(err.message || 'Failed to update product');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Failed to update product';
+      toast.error(message);
     } finally {
       setSaving(false);
     }

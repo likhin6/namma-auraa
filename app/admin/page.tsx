@@ -57,14 +57,13 @@ export default function AdminDashboard() {
   async function fetchStats() {
     setLoading(true);
     try {
-      const [productsRes, publishedRes, outOfStockRes, viewsRes, wishlistRes, cartRes, topProductsRes, searchesRes, usersRes] = await Promise.all([
+      const [productsRes, publishedRes, outOfStockRes, viewsRes, wishlistRes, cartRes, searchesRes, usersRes] = await Promise.all([
         supabase.from('products').select('id', { count: 'exact', head: true }),
         supabase.from('products').select('id', { count: 'exact', head: true }).eq('published', true),
         supabase.from('product_variants').select('id', { count: 'exact', head: true }).eq('stock', 0),
         supabase.from('analytics_events').select('id', { count: 'exact', head: true }).eq('event_type', 'product_view'),
         supabase.from('analytics_events').select('id', { count: 'exact', head: true }).eq('event_type', 'wishlist_add'),
         supabase.from('analytics_events').select('id', { count: 'exact', head: true }).eq('event_type', 'add_to_cart'),
-        supabase.rpc('get_top_products_by_views').limit(5).single().then(() => null).catch(() => null),
         supabase.from('analytics_events').select('metadata').eq('event_type', 'search').limit(50),
         supabase.from('profiles').select('id', { count: 'exact', head: true }),
       ]);
@@ -78,20 +77,23 @@ export default function AdminDashboard() {
         .limit(100);
 
       const productViewCounts: Record<string, { name: string; slug: string; views: number }> = {};
-      (viewEvents ?? []).forEach((e: any) => {
-        if (!e.product_id || !e.product) return;
-        if (!productViewCounts[e.product_id]) {
-          productViewCounts[e.product_id] = { name: e.product.name, slug: e.product.slug, views: 0 };
+      (viewEvents ?? []).forEach((e: Record<string, unknown>) => {
+        const productId = e.product_id as string | null;
+        const product = e.product as { name: string; slug: string } | null;
+        if (!productId || !product) return;
+        if (!productViewCounts[productId]) {
+          productViewCounts[productId] = { name: product.name, slug: product.slug, views: 0 };
         }
-        productViewCounts[e.product_id].views++;
+        productViewCounts[productId].views++;
       });
       setTopProducts(Object.values(productViewCounts).sort((a, b) => b.views - a.views).slice(0, 5));
 
       // Search terms
       const searchMap: Record<string, number> = {};
-      (searchesRes.data ?? []).forEach((e: any) => {
-        const term = e.metadata?.query;
-        if (term) searchMap[term] = (searchMap[term] || 0) + 1;
+      (searchesRes.data ?? []).forEach((e: Record<string, unknown>) => {
+        const metadata = e.metadata as Record<string, unknown> | null;
+        const term = metadata?.query;
+        if (typeof term === 'string') searchMap[term] = (searchMap[term] || 0) + 1;
       });
       const topSearches = Object.entries(searchMap).map(([term, count]) => ({ term, count })).sort((a, b) => b.count - a.count).slice(0, 5);
 

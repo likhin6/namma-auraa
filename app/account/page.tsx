@@ -56,10 +56,10 @@ export default function AccountPage() {
       await supabase.from('profiles').upsert({
         id: user!.id,
         name: editName,
-        email: user!.email,
+        email: user!.email ?? null,
         phone: editPhone || null,
       });
-      setProfile({ name: editName, email: user!.email, phone: editPhone });
+      setProfile({ name: editName, email: user!.email ?? null, phone: editPhone });
       setEditing(false);
     } finally {
       setSaving(false);
