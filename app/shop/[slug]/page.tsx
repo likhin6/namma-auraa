@@ -172,7 +172,7 @@ export default function ProductPage() {
 
   const images = product.product_images;
   const variants = product.product_variants ?? [];
-  const sizes = [...new Set(variants.map((v) => v.size))];
+  const sizes = Array.from(new Set(variants.map((v) => v.size)));
   const discount = product.mrp && product.mrp > product.price
     ? Math.round(((product.mrp - product.price) / product.mrp) * 100)
     : null;

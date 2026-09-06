@@ -27,8 +27,9 @@ export default function LoginPage() {
       if (error) throw error;
       await trackEvent('login', undefined, { method: 'email' });
       router.push(redirect);
-    } catch (err: any) {
-      setError(err.message || 'Login failed. Please check your credentials.');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Login failed. Please check your credentials.';
+      setError(message);
     } finally {
       setLoading(false);
     }

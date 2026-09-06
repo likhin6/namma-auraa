@@ -58,8 +58,8 @@ export default function WishlistPage() {
         .order('created_at', { ascending: false });
 
       const items = (data ?? [])
-        .map((w: { product: WishlistProduct | null }) => w.product)
-        .filter((p: WishlistProduct | null): p is WishlistProduct => p !== null);
+        .flatMap((w: { product: WishlistProduct[] }) => w.product)
+        .filter((p: WishlistProduct | undefined): p is WishlistProduct => p !== undefined);
       setProducts(items);
     } finally {
       setLoading(false);

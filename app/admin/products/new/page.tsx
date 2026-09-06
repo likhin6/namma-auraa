@@ -55,10 +55,10 @@ export default function NewProductPage() {
     }
   }
 
-  function updateForm(key: string, value: any) {
+  function updateForm(key: string, value: string | boolean) {
     setForm(prev => {
       const next = { ...prev, [key]: value };
-      if (key === 'name' && !slugEdited) {
+      if (key === 'name' && !slugEdited && typeof value === 'string') {
         next.slug = value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
       }
       return next;
@@ -124,8 +124,9 @@ export default function NewProductPage() {
 
       toast.success('Product created');
       router.push('/admin/products');
-    } catch (err: any) {
-      toast.error(err.message || 'Failed to create product');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Failed to create product';
+      toast.error(message);
     } finally {
       setSaving(false);
     }
@@ -209,7 +210,7 @@ export default function NewProductPage() {
               {[{ k: 'fabric', l: 'Fabric' }, { k: 'gsm', l: 'GSM' }, { k: 'fit', l: 'Fit' }, { k: 'print_type', l: 'Print Type' }].map(f => (
                 <div key={f.k} className="space-y-1">
                   <label className="text-xs uppercase tracking-widest text-gray-500">{f.l}</label>
-                  <input type="text" value={(form as any)[f.k]} onChange={e => updateForm(f.k, e.target.value)} className="w-full border border-gray-200 px-3 py-2.5 text-sm outline-none focus:border-[#0a0a0a]" />
+                  <input type="text" value={form[f.k as keyof typeof form] as string} onChange={e => updateForm(f.k, e.target.value)} className="w-full border border-gray-200 px-3 py-2.5 text-sm outline-none focus:border-[#0a0a0a]" />
                 </div>
               ))}
               <div className="sm:col-span-2 space-y-1">
@@ -275,7 +276,7 @@ export default function NewProductPage() {
                 { k: 'trending', l: 'Trending' },
               ].map(f => (
                 <label key={f.k} className="flex items-center gap-2 cursor-pointer">
-                  <input type="checkbox" checked={(form as any)[f.k]} onChange={e => updateForm(f.k, e.target.checked)} className="accent-[#0a0a0a] w-4 h-4" />
+                  <input type="checkbox" checked={form[f.k as keyof typeof form] as boolean} onChange={e => updateForm(f.k, e.target.checked)} className="accent-[#0a0a0a] w-4 h-4" />
                   <span className="text-sm text-gray-700">{f.l}</span>
                 </label>
               ))}

@@ -21,8 +21,9 @@ export default function ForgotPasswordPage() {
       });
       if (error) throw error;
       setSent(true);
-    } catch (err: any) {
-      setError(err.message || 'Something went wrong. Try again.');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Something went wrong. Try again.';
+      setError(message);
     } finally {
       setLoading(false);
     }
