@@ -5,6 +5,8 @@ import { CartProvider } from '@/context/CartContext';
 import { WishlistProvider } from '@/context/WishlistContext';
 import CartDrawer from '@/components/CartDrawer';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'NAMMA AURAA — Premium Indian Oversized T-Shirts',
   description:
