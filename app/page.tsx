@@ -115,10 +115,6 @@ export default function HomePage() {
             className="aspect-[7/6] w-full object-cover object-right md:aspect-auto md:h-auto md:object-contain"
           />
 
-          {/* Soft fade on the left edge as a safety net against any stray sliver
-              of the image's own text panel bleeding into the crop. */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-[#f8f6f2] to-transparent md:hidden" />
-
           {/* Contrast layer so the CTA buttons stay legible over the busy photo on mobile. */}
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/60 to-transparent md:hidden" />
 
