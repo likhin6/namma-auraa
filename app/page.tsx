@@ -93,72 +93,39 @@ export default function HomePage() {
       <Header />
 
       {/* ── HERO ── */}
-      <section className="relative min-h-[90vh] bg-[#f8f6f2] overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[90vh] items-center gap-8">
-            {/* Left content */}
-            <div className="py-20 lg:py-0 space-y-8 order-2 lg:order-1">
-              <div className="space-y-2">
-                <p className="text-xs uppercase tracking-[0.3em] text-[#c9a84c] font-medium">
-                  Premium Indian Streetwear
-                </p>
-                <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-[#0a0a0a] leading-[0.9] uppercase tracking-tight">
-                  MADE<br />
-                  <span className="text-[#c9a84c]">FOR THE</span><br />
-                  CULTURE.
-                </h1>
-              </div>
+      <section className="relative overflow-hidden bg-[#f8f6f2]">
+        <h1 className="sr-only">NAMMA AURAA — More Than AURAA</h1>
+        <img
+          src="/home.png?v=3"
+          alt="NAMMA AURAA streetwear campaign featuring three models"
+          className="h-[72vh] min-h-[540px] w-full object-cover object-[62%_center] md:h-auto md:min-h-0 md:object-contain"
+        />
 
-              <p className="text-gray-600 text-base sm:text-lg leading-relaxed max-w-md">
-                Oversized t-shirts born from the chaos and beauty of everyday Indian life. Crafted for those who wear their identity with pride.
-              </p>
+        {/* Makes the campaign image's desktop CTA artwork interactive. */}
+        <Link
+          href="/shop"
+          aria-label="Shop NAMMA AURAA t-shirts"
+          className="absolute left-[5.5%] top-[67%] z-10 hidden h-[6%] w-[12.5%] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white md:block"
+        />
+        <Link
+          href="/about"
+          aria-label="Read the NAMMA AURAA story"
+          className="absolute left-[18.5%] top-[67%] z-10 hidden h-[6%] w-[10.5%] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0a0a0a] md:block"
+        />
 
-              <div className="flex flex-wrap gap-4">
-                <Link
-                  href="/shop"
-                  className="bg-[#0a0a0a] text-white px-8 py-4 text-xs uppercase tracking-widest font-semibold hover:bg-[#c9a84c] hover:text-[#0a0a0a] transition-all duration-300 flex items-center gap-2"
-                >
-                  Shop T-Shirts
-                  <ArrowRight size={14} />
-                </Link>
-                <Link
-                  href="/about"
-                  className="border border-[#0a0a0a] text-[#0a0a0a] px-8 py-4 text-xs uppercase tracking-widest font-semibold hover:bg-[#0a0a0a] hover:text-white transition-all duration-300"
-                >
-                  Our Story
-                </Link>
-              </div>
-
-              <div className="flex items-center gap-8 pt-4">
-                <div className="text-center">
-                  <p className="text-2xl font-black text-[#0a0a0a]">100%</p>
-                  <p className="text-xs text-gray-500 uppercase tracking-widest">Premium Cotton</p>
-                </div>
-                <div className="w-px h-10 bg-gray-200" />
-                <div className="text-center">
-                  <p className="text-2xl font-black text-[#0a0a0a]">240</p>
-                  <p className="text-xs text-gray-500 uppercase tracking-widest">GSM Quality</p>
-                </div>
-                <div className="w-px h-10 bg-gray-200" />
-                <div className="text-center">
-                  <p className="text-2xl font-black text-[#0a0a0a]">Made</p>
-                  <p className="text-xs text-gray-500 uppercase tracking-widest">In India</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Right image */}
-            <div className="relative order-1 lg:order-2 h-[50vh] lg:h-full lg:min-h-[90vh]">
-              <div className="absolute inset-0 lg:inset-y-0 lg:right-0 lg:w-full">
-                <img
-                  src="https://images.pexels.com/photos/36942017/pexels-photo-36942017.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-                  alt="NAMMA AURAA — Made for the Culture"
-                  className="w-full h-full object-cover object-top"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#f8f6f2]/40 to-transparent lg:bg-gradient-to-r lg:from-[#f8f6f2]/30 lg:to-transparent" />
-              </div>
-            </div>
-          </div>
+        <div className="absolute inset-x-6 bottom-7 z-10 flex gap-3 md:hidden">
+          <Link
+            href="/shop"
+            className="bg-[#0a0a0a] px-5 py-3 text-xs font-semibold uppercase tracking-widest text-white transition-colors hover:bg-[#c9a84c] hover:text-[#0a0a0a]"
+          >
+            Shop T-Shirts
+          </Link>
+          <Link
+            href="/about"
+            className="border border-[#0a0a0a] bg-white/90 px-5 py-3 text-xs font-semibold uppercase tracking-widest text-[#0a0a0a] transition-colors hover:bg-[#0a0a0a] hover:text-white"
+          >
+            Our Story
+          </Link>
         </div>
       </section>
 
