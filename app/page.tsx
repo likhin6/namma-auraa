@@ -93,39 +93,68 @@ export default function HomePage() {
       <Header />
 
       {/* ── HERO ── */}
-      <section className="relative overflow-hidden bg-[#f8f6f2]">
+      <section className="overflow-hidden bg-[#f8f6f2]">
         <h1 className="sr-only">NAMMA AURAA — More Than AURAA</h1>
-        <img
-          src="/home.png?v=3"
-          alt="NAMMA AURAA streetwear campaign featuring three models"
-          className="h-[72vh] min-h-[540px] w-full object-cover object-[62%_center] md:h-auto md:min-h-0 md:object-contain"
-        />
 
-        {/* Makes the campaign image's desktop CTA artwork interactive. */}
-        <Link
-          href="/shop"
-          aria-label="Shop NAMMA AURAA t-shirts"
-          className="absolute left-[5.5%] top-[67%] z-10 hidden h-[6%] w-[12.5%] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white md:block"
-        />
-        <Link
-          href="/about"
-          aria-label="Read the NAMMA AURAA story"
-          className="absolute left-[18.5%] top-[67%] z-10 hidden h-[6%] w-[10.5%] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0a0a0a] md:block"
-        />
+        {/* Real, crisp headline for mobile — the campaign image's own baked-in
+            headline text lives in a panel that gets cropped out below, and
+            raster text blurs/gets cut off when scaled, so we render it live instead. */}
+        <div className="px-5 pt-8 pb-6 md:hidden">
+          <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.3em] text-[#c9a84c]">
+            Premium Indian Streetwear
+          </p>
+          <p className="font-display text-4xl font-black uppercase leading-[0.95] tracking-tight text-[#0a0a0a]">
+            MADE <span className="text-[#c9a84c]">FOR THE</span> CULTURE.
+          </p>
+        </div>
 
-        <div className="absolute inset-x-6 bottom-7 z-10 flex gap-3 md:hidden">
+        <div className="relative">
+          <img
+            src="/home.png?v=3"
+            alt="NAMMA AURAA streetwear campaign featuring three models"
+            className="aspect-[7/6] w-full object-cover object-right md:aspect-auto md:h-auto md:object-contain"
+          />
+
+          {/* Soft fade on the left edge as a safety net against any stray sliver
+              of the image's own text panel bleeding into the crop. */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-[#f8f6f2] to-transparent md:hidden" />
+
+          {/* Contrast layer so the CTA buttons stay legible over the busy photo on mobile. */}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/60 to-transparent md:hidden" />
+
+          {/* Crisp HTML buttons that sit exactly over the campaign image's
+              (blurry, baked-in) CTA artwork, so the visible text is always sharp. */}
           <Link
             href="/shop"
-            className="bg-[#0a0a0a] px-5 py-3 text-xs font-semibold uppercase tracking-widest text-white transition-colors hover:bg-[#c9a84c] hover:text-[#0a0a0a]"
+            aria-label="Shop NAMMA AURAA t-shirts"
+            className="group absolute left-[5.5%] top-[67%] z-10 hidden h-[6%] w-[12.5%] items-center justify-center gap-2 bg-[#0a0a0a] text-[clamp(0.55rem,1.05vw,0.9rem)] font-semibold uppercase tracking-widest text-white transition-colors duration-300 hover:bg-[#c9a84c] hover:text-[#0a0a0a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white md:flex"
           >
             Shop T-Shirts
+            <ArrowRight size={14} className="shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
           <Link
             href="/about"
-            className="border border-[#0a0a0a] bg-white/90 px-5 py-3 text-xs font-semibold uppercase tracking-widest text-[#0a0a0a] transition-colors hover:bg-[#0a0a0a] hover:text-white"
+            aria-label="Read the NAMMA AURAA story"
+            className="absolute left-[18.5%] top-[67%] z-10 hidden h-[6%] w-[10.5%] items-center justify-center border border-[#0a0a0a] bg-white text-[clamp(0.55rem,1.05vw,0.9rem)] font-semibold uppercase tracking-widest text-[#0a0a0a] transition-colors duration-300 hover:bg-[#0a0a0a] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0a0a0a] md:flex"
           >
             Our Story
           </Link>
+
+          <div className="absolute inset-x-5 bottom-6 z-20 flex gap-3 md:hidden">
+            <Link
+              href="/shop"
+              className="group flex flex-1 items-center justify-center gap-2 bg-[#0a0a0a] px-5 py-3.5 text-xs font-semibold uppercase tracking-widest text-white transition-colors duration-300 hover:bg-[#c9a84c] hover:text-[#0a0a0a]"
+            >
+              Shop T-Shirts
+              <ArrowRight size={14} className="shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
+            <Link
+              href="/about"
+              className="flex flex-1 items-center justify-center border border-white/70 bg-white/95 px-5 py-3.5 text-xs font-semibold uppercase tracking-widest text-[#0a0a0a] transition-colors duration-300 hover:bg-[#0a0a0a] hover:text-white"
+            >
+              Our Story
+            </Link>
+          </div>
         </div>
       </section>
 
