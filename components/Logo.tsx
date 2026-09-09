@@ -9,7 +9,7 @@ export default function Logo({ className = '', variant = 'dark' }: LogoProps) {
     <img
       src="/logo.png"
       alt="NAMMA AURAA"
-      className={`block h-auto w-full object-contain ${variant === 'light' ? 'brightness-0 invert' : ''} ${className}`}
+      className={`block h-auto object-contain ${variant === 'light' ? 'brightness-0 invert' : ''} ${className}`}
     />
   );
 }
