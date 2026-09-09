@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Logo from '@/components/Logo';
 import { Eye, EyeOff, ArrowLeft } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { trackEvent } from '@/lib/analytics';
@@ -49,10 +50,10 @@ export default function AdminLoginPage() {
     <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center p-6">
       <div className="w-full max-w-md space-y-8">
         <div className="text-center">
-          <div className="flex items-center justify-center gap-2 mb-6">
-            <span className="font-black uppercase tracking-[0.18em] text-white text-xl">NAMMA</span>
-            <span className="w-2 h-2 rounded-full bg-[#c9a84c]" />
-            <span className="font-black uppercase tracking-[0.18em] text-white text-xl">AURAA</span>
+          <div className="flex items-center justify-center mb-6">
+            <Link href="/">
+              <Logo variant="light" className="w-36" />
+            </Link>
           </div>
           <div className="inline-block border border-[#c9a84c] px-3 py-1 mb-4">
             <p className="text-[10px] uppercase tracking-widest text-[#c9a84c] font-medium">Admin Access</p>

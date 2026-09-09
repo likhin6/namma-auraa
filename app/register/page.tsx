@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Logo from '@/components/Logo';
 import { Eye, EyeOff } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { trackEvent } from '@/lib/analytics';
@@ -74,11 +75,9 @@ export default function RegisterPage() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border border-white rounded-full" />
         </div>
         <div className="relative z-10 text-center space-y-6">
-          <div className="flex items-center justify-center gap-2">
-            <span className="text-white font-black uppercase tracking-[0.18em] text-2xl">NAMMA</span>
-            <span className="w-2 h-2 rounded-full bg-[#c9a84c]" />
-            <span className="text-white font-black uppercase tracking-[0.18em] text-2xl">AURAA</span>
-          </div>
+          <Link href="/">
+            <Logo variant="light" className="w-48" />
+          </Link>
           <p className="text-gray-400 text-lg font-light italic">
             &ldquo;Join the culture.&rdquo;
           </p>
@@ -102,11 +101,10 @@ export default function RegisterPage() {
       {/* Right form */}
       <div className="flex-1 flex items-center justify-center p-6 sm:p-12">
         <div className="w-full max-w-md space-y-8">
-          {/* Mobile logo */}
-          <div className="lg:hidden flex items-center justify-center gap-2 mb-4">
-            <span className="font-black uppercase tracking-[0.18em] text-xl">NAMMA</span>
-            <span className="w-2 h-2 rounded-full bg-[#c9a84c]" />
-            <span className="font-black uppercase tracking-[0.18em] text-xl">AURAA</span>
+          <div className="lg:hidden flex items-center justify-center mb-4">
+            <Link href="/">
+              <Logo className="w-32" />
+            </Link>
           </div>
 
           <div className="text-center lg:text-left">

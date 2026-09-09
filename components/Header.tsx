@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Search, User, Heart, ShoppingBag, Menu, X, ChevronRight } from 'lucide-react';
+import Logo from './Logo';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import { useAuth } from '@/context/AuthContext';
@@ -71,15 +72,7 @@ export default function Header() {
               href="/"
               className="flex items-center gap-2 absolute left-1/2 -translate-x-1/2 lg:static lg:translate-x-0"
             >
-              <div className="flex items-center gap-1">
-                <span className="text-[#0a0a0a] font-black uppercase tracking-[0.18em] text-sm lg:text-base">
-                  NAMMA
-                </span>
-                <span className="w-1.5 h-1.5 rounded-full bg-[#c9a84c] mt-0.5" />
-                <span className="text-[#0a0a0a] font-black uppercase tracking-[0.18em] text-sm lg:text-base">
-                  AURAA
-                </span>
-              </div>
+              <Logo className="w-20 lg:w-24" />
             </Link>
 
             {/* Desktop Nav */}
@@ -182,11 +175,9 @@ export default function Header() {
           <div className="absolute left-0 top-0 bottom-0 w-80 bg-white shadow-xl flex flex-col">
             {/* Mobile Menu Header */}
             <div className="flex items-center justify-between px-6 h-16 border-b border-gray-100">
-              <div className="flex items-center gap-1">
-                <span className="font-black uppercase tracking-[0.15em] text-sm">NAMMA</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-[#c9a84c]" />
-                <span className="font-black uppercase tracking-[0.15em] text-sm">AURAA</span>
-              </div>
+              <Link href="/" onClick={() => setMobileMenuOpen(false)}>
+                <Logo className="w-[4.5rem]" />
+              </Link>
               <button onClick={() => setMobileMenuOpen(false)}>
                 <X size={20} />
               </button>

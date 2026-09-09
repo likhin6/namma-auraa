@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Logo from '@/components/Logo';
 import { ArrowLeft, Mail } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 
@@ -33,10 +34,10 @@ export default function ForgotPasswordPage() {
     <div className="min-h-screen bg-[#f8f6f2] flex items-center justify-center p-6">
       <div className="w-full max-w-md space-y-8">
         <div className="text-center">
-          <div className="flex items-center justify-center gap-2 mb-6">
-            <span className="font-black uppercase tracking-[0.18em] text-xl">NAMMA</span>
-            <span className="w-2 h-2 rounded-full bg-[#c9a84c]" />
-            <span className="font-black uppercase tracking-[0.18em] text-xl">AURAA</span>
+          <div className="flex items-center justify-center mb-6">
+            <Link href="/">
+              <Logo className="w-32" />
+            </Link>
           </div>
           <h1 className="text-2xl font-black uppercase tracking-tight text-[#0a0a0a]">Reset Password</h1>
           <p className="text-gray-500 text-sm mt-2">We&apos;ll send you a reset link</p>

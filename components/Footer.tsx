@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Logo from './Logo';
 import { supabase } from '@/lib/supabase';
 import { Instagram, Mail, ArrowRight } from 'lucide-react';
 
@@ -33,11 +34,9 @@ export default function Footer() {
           {/* Brand column */}
           <div className="lg:col-span-2 space-y-6">
             {/* Logo */}
-            <div className="flex items-center gap-1">
-              <span className="font-black uppercase tracking-[0.18em] text-white text-lg">NAMMA</span>
-              <span className="w-2 h-2 rounded-full bg-[#c9a84c]" />
-              <span className="font-black uppercase tracking-[0.18em] text-white text-lg">AURAA</span>
-            </div>
+            <Link href="/">
+              <Logo variant="light" className="w-32" />
+            </Link>
 
             <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
               Premium oversized t-shirts rooted in Indian culture, chaos, and everyday moments. Worn by those who own their identity.
